@@ -8,8 +8,8 @@ function validateparameters(
   const { query } = req
   const requiredParameters = ['filename', 'height', 'width']
 
-  for (let i = 0; i < requiredParameters.length; i++) {
-    const parameter = requiredParameters[i]
+  for (let index = 0; index < requiredParameters.length; index++) {
+    const parameter = requiredParameters[index]
     if (query[parameter] === undefined) {
       res.status(400).send('Error: Parameter(s) missing..')
       return
@@ -24,7 +24,7 @@ function validateparameters(
 
     if (parameter == 'height' || parameter == 'width') {
       const numberValue = Number(parameterValue)
-      if (!numberValue) {
+      if(!numberValue) {
         res.status(400).send('height and width should be numbers')
         return
       }

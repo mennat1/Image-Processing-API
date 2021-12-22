@@ -21,19 +21,19 @@ const resizeImage = async (req: Request, res: Response): Promise<void> => {
     // console.log('imgCachePath=', imgCachePath)
 
     // send cached file
-    if (imgPathExists) {
+    if(imgPathExists){
       console.log('Found cache')
       res.sendFile(`/${imgPath}`, { root: path.join('./images/cache') })
-    } else {
+    }else{
       console.log('Did not find cache')
       const response = await sharpResize(f, h, w)
       response.toFile(imgCachePath, (error: Error) => {
-        if (error) {
+        if(error) {
           res.status(403).send({
             ok: 'failed',
             message: error.message,
           })
-        } else {
+        }else{
           res.sendFile(`/${imgPath}`, { root: path.join('./images/cache') })
         }
       })
@@ -43,15 +43,5 @@ const resizeImage = async (req: Request, res: Response): Promise<void> => {
   }
 }
 
-// export const readThumbnailFullPaths = (req: Request, res: Response): void => {
-//   const directory = 'images'
-//   const data = fs.readdirSync(directory)
-//   const thumbnails = data.map((d) => {
-//     return `http://localhost:3000/${d}`
-//   })
-//   res.status(200).send({
-//     thumbnails,
-//   })
-// }
 
 export default resizeImage

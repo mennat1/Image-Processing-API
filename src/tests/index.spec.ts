@@ -27,10 +27,7 @@ describe('API', () => {
     expect(response.body.message).toBe('Input file is missing')
   })
 
-  it('should should return a status of 200', async () => {
-    const response = await request.get('/')
-    expect(response.status).toBe(200)
-  })
+
 
   it('should return an error if a parameter is missing', async () => {
     const response = await request.get('/image-processing-api/resize-image')
@@ -54,12 +51,7 @@ describe('API', () => {
     expect(response.status).toBe(400)
   })
 
-  it('should return a status of 400 if an error occured', async () => {
-    const response = await request.get(
-      '/image-processing-api/resize-image?filename=img1&width=hello&height=hello'
-    )
-    expect(response.status).toBe(400)
-  })
+ 
 })
 
 describe('Using Sharp', () => {
